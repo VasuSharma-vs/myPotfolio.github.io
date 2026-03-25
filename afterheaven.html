@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>After Heaven — Zombie Horde Survival Game</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Mono:wght@300;400;500&family=Outfit:wght@200;300;400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0a14;
+      --bg2: #1a1a2e;
+      --bg3: #2a2a4a;
+      --card: #191928;
+      --border: #2a3f6f;
+      --accent-primary: #0066ff;
+      --accent-light: #4499ff;
+      --accent-dark: #003d99;
+      --text: #FFFFFF;
+      --muted: #999999;
+      --accent: #3366cc;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--accent-dark);
+      padding: 20px 40px;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .back-link {
+      color: var(--accent-primary);
+      text-decoration: none;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .back-link:hover {
+      color: var(--accent-light);
+    }
+
+    .header-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent-primary);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 80px 40px;
+      background: linear-gradient(135deg, #0a0a14 0%, #001a4d 50%, #0a0a14 100%),
+                  url('./images/AfterHeaven/Back\ ground\ images/Back\ gournd\ ShotLow.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse 100% 80% at 50% 50%, rgba(0, 102, 255, 0.15) 0%, rgba(0, 10, 30, 0.8) 70%);
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      text-align: center;
+      animation: fadeInDown 1.2s ease;
+    }
+
+    .hero-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-primary);
+      margin-bottom: 20px;
+      opacity: 0.9;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 80px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 15px;
+      color: var(--text);
+      text-shadow: 0 0 30px rgba(0, 102, 255, 0.4);
+    }
+
+    .hero-subtitle {
+      font-family: 'DM Mono', monospace;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent-light);
+      margin-bottom: 30px;
+    }
+
+    .hero-bio {
+      font-size: 16px;
+      color: #888;
+      margin-bottom: 40px;
+      line-height: 1.8;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .game-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .stat-card {
+      background: rgba(0, 102, 255, 0.05);
+      border: 1px solid var(--accent-dark);
+      border-radius: 6px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--accent-light);
+      margin-bottom: 5px;
+    }
+
+    .stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 14px 40px;
+      background: var(--accent-primary);
+      border: 2px solid var(--accent-primary);
+      border-radius: 4px;
+      color: var(--text);
+      text-decoration: none;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .cta-button:hover {
+      background: var(--accent-light);
+      border-color: var(--accent-light);
+      box-shadow: 0 0 20px rgba(0, 102, 255, 0.5);
+    }
+
+    /* ── CONTENT ── */
+    .content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      margin-bottom: 80px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 40px;
+      border-bottom: 2px solid var(--accent-dark);
+      padding-bottom: 20px;
+    }
+
+    .section-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--accent-primary);
+      opacity: 0.6;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* ── FEATURES GRID ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent-primary);
+      border-radius: 6px;
+      padding: 25px;
+      transition: all 0.3s;
+    }
+
+    .feature-card:hover {
+      border-left-color: var(--accent-light);
+      background: rgba(0, 102, 255, 0.05);
+    }
+
+    .feature-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .feature-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .feature-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── GALLERY ── */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      aspect-ratio: 16/10;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .gallery-item:hover {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 30px rgba(0, 102, 255, 0.3);
+      transform: translateY(-5px);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    /* ── GAMEPLAY MECHANICS ── */
+    .mechanics-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    .mechanics-list li {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent-primary);
+      padding: 18px 20px;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #888;
+      line-height: 1.6;
+      transition: all 0.3s;
+    }
+
+    .mechanics-list li:hover {
+      border-left-color: var(--accent-light);
+      background: rgba(0, 102, 255, 0.05);
+    }
+
+    .mechanics-list strong {
+      color: var(--accent-light);
+    }
+
+    /* ── TECH SPECS ── */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .tech-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .tech-name {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent-primary);
+      margin-bottom: 8px;
+    }
+
+    .tech-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--accent-dark);
+      padding: 40px;
+      text-align: center;
+      margin-top: 80px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--accent-primary);
+      text-decoration: none;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .footer-link:hover {
+      color: var(--accent-light);
+    }
+
+    .footer-note {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: fadeInUp 0.8s ease;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero {
+        padding: 40px 24px;
+      }
+
+      .hero-title {
+        font-size: 48px;
+      }
+
+      .game-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .tech-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .header {
+        padding: 15px 24px;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .content {
+        padding: 40px 24px;
+      }
+
+      .section-title {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<div class="header">
+  <a href="./index.html" class="back-link">← Back to Portfolio</a>
+  <span class="header-title">After Heaven — Zombie Game</span>
+  <div></div>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-label">🧟 Indie Game | UE5 | Real-Time Simulation</div>
+    <h1 class="hero-title">After Heaven</h1>
+    <div class="hero-subtitle">A Premium Zombie Horde Survival Experience</div>
+    
+    <p class="hero-bio">
+      A cutting-edge zombie horde survival game powered by GPU-driven crowd simulation. 
+      Control thousands of animated zombies at 80-90 FPS with advanced AI, state machines, 
+      and physics interactions in a dark, atmospheric post-apocalyptic world.
+    </p>
+
+    <div class="game-stats">
+      <div class="stat-card">
+        <div class="stat-num">20K</div>
+        <div class="stat-label">Simultaneous Agents</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">90</div>
+        <div class="stat-label">Target FPS</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">700+</div>
+        <div class="stat-label">VAT Textures</div>
+      </div>
+    </div>
+
+    <a href="https://www.youtube.com/watch?v=SS7p7RW3JRo" target="_blank" class="cta-button">Watch Gameplay Demo</a>
+  </div>
+</div>
+
+<!-- ── CONTENT ── -->
+<div class="content">
+
+  <!-- ── OVERVIEW ── -->
+  <div class="section fade-in">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <h2 class="section-title">Game Overview</h2>
+    </div>
+    <p style="font-size: 15px; color: #a8a8a8; line-height: 1.8; margin-bottom: 30px;">
+      After Heaven is a next-generation zombie horde survival game that pushes the boundaries of real-time 
+      GPU simulation. Unlike traditional crowd systems, it leverages Vertex Animation Textures and advanced 
+      shader state machines to render and animate up to 20,000 zombies simultaneously while maintaining 
+      80-90 FPS performance. The game features dynamic environmental interactions, emergent zombie AI behavior, 
+      and a haunting atmosphere designed to deliver a truly immersive post-apocalyptic experience.
+    </p>
+  </div>
+
+  <!-- ── GAMEPLAY VIDEO ── -->
+  <div class="section fade-in">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <h2 class="section-title">Gameplay Demo</h2>
+    </div>
+    <div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 40px;">
+      <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" 
+              src="https://www.youtube.com/embed/SS7p7RW3JRo?autoplay=0&modestbranding=1&rel=0" 
+              title="After Heaven - Zombie Horde Gameplay Demo"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <!-- ── CORE FEATURES ── -->
+  <div class="section fade-in">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <h2 class="section-title">Core Features</h2>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚙️</div>
+        <h3 class="feature-title">GPU Crowd System</h3>
+        <p class="feature-desc">20,000 zombies rendered and animated entirely on the GPU using custom Vertex Animation Textures, eliminating skeletal mesh bottlenecks.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🧠</div>
+        <h3 class="feature-title">Advanced AI State Machine</h3>
+        <p class="feature-desc">Shader-driven behavioral state machine with dynamic transitions, hunting patterns, and emergent group behaviors.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">💥</div>
+        <h3 class="feature-title">Physics Interactions</h3>
+        <p class="feature-desc">Smart ragdoll system that transitions zombies between GPU-animated crowd mode and physics-enabled skeletal mode on impact.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🌍</div>
+        <h3 class="feature-title">Dynamic Environment</h3>
+        <p class="feature-desc">Persistent, interactive world where zombie behavior adapts to environmental hazards, lit zones, and player position data.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3 class="feature-title">Precision Targeting</h3>
+        <p class="feature-desc">Real-time hit detection system processing thousands of simultaneous interactions with minimal latency.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎬</div>
+        <h3 class="feature-title">Cinematic Quality</h3>
+        <p class="feature-desc">Ray-traced lighting, volumetric fog, and atmospheric effects create a dark, immersive survival horror aesthetic.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── GALLERY ── -->
+  <div class="section fade-in">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <h2 class="section-title">Visual Gallery</h2>
+    </div>
+
+    <div class="gallery">
+      <div class="gallery-item">
+        <img src="./images/AfterHeaven/Back%20ground%20images/Back%20gournd%20ShotLow.png" alt="After Heaven Gameplay Environment 01" style="width:100%; height:100%; object-fit:cover;"/>
+      </div>
+      <div class="gallery-item">
+        <img src="./images/AfterHeaven/Back%20ground%20images/Back%20gournd%20%20Shot.0547.png" alt="After Heaven Gameplay Environment 02" style="width:100%; height:100%; object-fit:cover;"/>
+      </div>
+      <div class="gallery-item">
+        <img src="./images/AfterHeaven/Main%20logo/AH_LOGO%202560x1440.jpg" alt="After Heaven Main Logo" style="width:100%; height:100%; object-fit:contain; background: var(--card);"/>
+      </div>
+      <div class="gallery-item">
+        <img src="./images/AfterHeaven/Back%20ground%20images/Back%20gournd%20Shot.0540_Low.jpg" alt="After Heaven Atmosphere VFX" style="width:100%; height:100%; object-fit:cover;"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── GAMEPLAY MECHANICS ── -->
+  <div class="section fade-in">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <h2 class="section-title">Gameplay Mechanics</h2>
+    </div>
+
+    <ul class="mechanics-list">
+      <li><strong>Horde Intelligence:</strong> Zombies exhibit adaptive behavior — pursuing players, investigating noise, and engaging in territorial conflicts. Group dynamics emerge naturally from individual AI routines.</li>
+      <li><strong>Dynamic Spawning:</strong> Real-time spawning system manages agent lifecycle, ensuring constant challenge while optimizing GPU resources.</li>
+      <li><strong>Environmental Hazards:</strong> Fire, radiation zones, and structural collapse events create dynamic obstacles that both player and zombies must navigate.</li>
+      <li><strong>Ragdoll Physics Cascade:</strong> When zombies enter ragdoll mode, they're pooled for efficient re-animation, preventing memory bloat during intense combat.</li>
+      <li><strong>Weapon Impact System:</strong> Complex hit registration validates every shot against thousands of agents, with proper feedback and state transitions.</li>
+      <li><strong>Atmospheric Survival:</strong> Limited resources, environmental damage, and the constant threat of overwhelming hordes create strategic, tense gameplay.</li>
+    </ul>
+  </div>
+
+  <!-- ── TECHNICAL SPECS ── -->
+  <div class="section fade-in">
+    <div class="section-header">
+      <div class="section-num">06</div>
+      <h2 class="section-title">Technical Specifications</h2>
+    </div>
+
+    <div class="tech-grid">
+      <div class="tech-item">
+        <div class="tech-name">Engine</div>
+        <div class="tech-desc">Unreal Engine 5<br/>Latest Bleeding Edge</div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-name">Crowd System</div>
+        <div class="tech-desc">GPU VAT<br/>20,000 Agents</div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-name">Performance</div>
+        <div class="tech-desc">80-90 FPS<br/>4K Resolution</div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-name">AI System</div>
+        <div class="tech-desc">Shader State Machine<br/>Niagara GPU Behavior</div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-name">Physics</div>
+        <div class="tech-desc">Dynamic Ragdoll<br/>Smart Pooling</div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-name">Graphics</div>
+        <div class="tech-desc">Ray Tracing<br/>Volumetric Fog</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DEVELOPMENT ── -->
+  <div class="section fade-in">
+    <div class="section-header">
+      <div class="section-num">07</div>
+      <h2 class="section-title">Development Tools</h2>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+      <div style="background: var(--card); border: 1px solid var(--border); padding: 15px; border-radius: 6px; text-align: center;">
+        <div style="font-size: 12px; color: var(--blood); font-weight: 700; margin-bottom: 5px;">Primary Engine</div>
+        <div style="font-size: 13px; color: var(--text);">Unreal Engine 5</div>
+      </div>
+      <div style="background: var(--card); border: 1px solid var(--border); padding: 15px; border-radius: 6px; text-align: center;">
+        <div style="font-size: 12px; color: var(--blood); font-weight: 700; margin-bottom: 5px;">Asset Pipeline</div>
+        <div style="font-size: 13px; color: var(--text);">Blender + Python</div>
+      </div>
+      <div style="background: var(--card); border: 1px solid var(--border); padding: 15px; border-radius: 6px; text-align: center;">
+        <div style="font-size: 12px; color: var(--blood); font-weight: 700; margin-bottom: 5px;">Shader Programming</div>
+        <div style="font-size: 13px; color: var(--text);">HLSL / Material Editor</div>
+      </div>
+      <div style="background: var(--card); border: 1px solid var(--border); padding: 15px; border-radius: 6px; text-align: center;">
+        <div style="font-size: 12px; color: var(--blood); font-weight: 700; margin-bottom: 5px;">Particle System</div>
+        <div style="font-size: 13px; color: var(--text);">Niagara GPU Emitters</div>
+      </div>
+      <div style="background: var(--card); border: 1px solid var(--border); padding: 15px; border-radius: 6px; text-align: center;">
+        <div style="font-size: 12px; color: var(--blood); font-weight: 700; margin-bottom: 5px;">Version Control</div>
+        <div style="font-size: 13px; color: var(--text);">Perforce / Git</div>
+      </div>
+      <div style="background: var(--card); border: 1px solid var(--border); padding: 15px; border-radius: 6px; text-align: center;">
+        <div style="font-size: 12px; color: var(--blood); font-weight: 700; margin-bottom: 5px;">Profiling</div>
+        <div style="font-size: 13px; color: var(--text);">GPU Insights / NSight</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-links">
+    <a href="https://www.youtube.com/watch?v=SS7p7RW3JRo" target="_blank" class="footer-link">YouTube Demo</a>
+    <a href="mailto:vasusharma244@gmail.com" class="footer-link">Contact Me</a>
+    <a href="https://www.linkedin.com/in/vasu-sharma-80o" target="_blank" class="footer-link">LinkedIn</a>
+    <a href="https://github.com/VasuSharma-vs" target="_blank" class="footer-link">GitHub</a>
+  </div>
+  <div class="footer-note">After Heaven © 2025 · Vasu Sharma · Premium Game Development</div>
+</footer>
+
+</body>
+</html>

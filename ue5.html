@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vasu Sharma — UE5 Technical Artist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Mono:wght@300;400;500&family=Outfit:wght@200;300;400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg: #000000;
+      --bg2: #111111;
+      --bg3: #222222;
+      --card: #1a1a1a;
+      --border: #333333;
+      --gold: #D4AF37;
+      --gold2: #e8c97a;
+      --text: #FFFFFF;
+      --muted: #CCCCCC;
+      --accent: #7eb8a4;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 40px;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .back-link {
+      color: var(--gold);
+      text-decoration: none;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .back-link:hover {
+      color: var(--gold2);
+    }
+
+    .header-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .header-separator {
+      flex: 1;
+      margin: 0 40px;
+    }
+
+    /* ── CONTENT ── */
+    .content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 40px 60px;
+    }
+
+    /* ── HERO SECTION ── */
+    .hero-section {
+      margin-bottom: 80px;
+      text-align: center;
+    }
+
+    .hero-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 15px;
+      opacity: 0.9;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 56px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: var(--text);
+    }
+
+    .hero-subtitle {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 30px;
+    }
+
+    .hero-bio {
+      font-size: 15px;
+      color: #a8a8a8;
+      max-width: 900px;
+      margin: 0 auto 40px;
+      line-height: 1.8;
+    }
+
+    .hero-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .hero-link {
+      color: var(--gold);
+      text-decoration: none;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .hero-link:hover {
+      color: var(--gold2);
+    }
+
+    /* ── FEATURED PROJECT ── */
+    .featured-project {
+      background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+      border: 2px solid var(--gold);
+      border-radius: 8px;
+      padding: 40px;
+      margin-bottom: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .featured-project::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--gold), var(--accent));
+    }
+
+    .project-badge {
+      color: var(--gold);
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+
+    .featured-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+
+    .stat-pills {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .stat-pill {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 5px;
+    }
+
+    .stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .feature-list {
+      list-style: none;
+      margin-bottom: 25px;
+    }
+
+    .feature-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      color: #a8a8a8;
+      line-height: 1.7;
+    }
+
+    .feature-list li:last-child {
+      border-bottom: none;
+    }
+
+    .feature-list strong {
+      color: var(--gold);
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      margin-bottom: 60px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .section-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+
+    /* ── EXPERIENCE CARDS ── */
+    .exp-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 18px;
+      transition: all 0.3s ease;
+    }
+
+    .exp-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+
+    .exp-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+
+    .exp-company {
+      color: var(--gold);
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .exp-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .exp-bullets {
+      list-style: none;
+      padding: 15px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 15px;
+    }
+
+    .exp-bullets li {
+      padding: 8px 0;
+      padding-left: 15px;
+      font-size: 13px;
+      color: #a8a8a8;
+      line-height: 1.6;
+      position: relative;
+    }
+
+    .exp-bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+    }
+
+    .exp-bullets strong {
+      color: var(--text);
+    }
+
+    /* ── TAGS ── */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 5px 12px;
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: all 0.3s;
+    }
+
+    .tag.highlight {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(212, 175, 55, 0.05);
+    }
+
+    .tag:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ── SKILLS GRID ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .skill-group {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .skill-group-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 15px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+
+    .skill-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-pill {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 6px 12px;
+      font-size: 11px;
+      color: #9a9a9a;
+      transition: all 0.3s;
+    }
+
+    .skill-pill:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 60px 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 40px;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-contact {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .footer-contact a {
+      color: var(--gold);
+      text-decoration: none;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .footer-contact a:hover {
+      color: var(--gold2);
+    }
+
+    .footer-note {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .header {
+        padding: 15px 24px;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .content {
+        padding: 40px 24px;
+      }
+
+      .hero-title {
+        font-size: 36px;
+      }
+
+      .featured-title {
+        font-size: 24px;
+      }
+
+      .stat-pills {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      }
+
+      .exp-header {
+        flex-direction: column;
+      }
+
+      .exp-date {
+        margin-top: 8px;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<div class="header">
+  <a href="./index.html" class="back-link">← Back to Portfolio</a>
+  <div class="header-separator"></div>
+  <span class="header-title">Unreal Engine 5 | Technical Artist</span>
+</div>
+
+<!-- ── CONTENT ── -->
+<div class="content">
+
+  <!-- ── HERO ── -->
+  <div class="hero-section">
+    <div class="hero-label">Technical Artist · UE5 Developer · Solo Indie Dev</div>
+    <h1 class="hero-title">UE5 Portfolio</h1>
+    <div class="hero-subtitle">Real-Time GPU Simulation & Advanced Rendering</div>
+    <p class="hero-bio">
+      Technical Artist and Game Developer specializing in real-time GPU simulation, 
+      Unreal Engine 5, and shader-driven architecture. Engineered a 20,000-zombie crowd system 
+      at 80–90 FPS using custom Vertex Animation Textures. Built complete custom tooling pipelines 
+      and shipped AAA-quality 3D assets professionally.
+    </p>
+    <div class="hero-links">
+      <a href="https://www.youtube.com/watch?v=SS7p7RW3JRo" target="_blank" class="hero-link">YouTube Demo</a>
+      <a href="mailto:vasusharma244@gmail.com" class="hero-link">vasusharma244@gmail.com</a>
+      <a href="https://www.linkedin.com/in/vasu-sharma-80o" target="_blank" class="hero-link">LinkedIn</a>
+      <a href="https://github.com/VasuSharma-vs" target="_blank" class="hero-link">GitHub</a>
+    </div>
+  </div>
+
+  <!-- ── FEATURED PROJECT ── -->
+  <div class="featured-project">
+    <span class="project-badge">🎮 Featured Project</span>
+    <h2 class="featured-title">After-Heaven — Zombie Horde Game</h2>
+    <div style="color: var(--gold); margin-bottom: 20px; font-family: 'DM Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">Unreal Engine 5 · Solo Developer · Feb 2025 – Present</div>
+
+    <div class="stat-pills">
+      <div class="stat-pill">
+        <div class="stat-number">20K</div>
+        <div class="stat-label">Agents</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-number">90</div>
+        <div class="stat-label">FPS</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-number">700+</div>
+        <div class="stat-label">VAT Segments</div>
+      </div>
+    </div>
+
+    <ul class="feature-list">
+      <li><strong>GPU Crowd Simulation:</strong> Engineered 20,000 real-time zombie agents at 80–90 FPS using Vertex Animation Textures — bypassing skeletal mesh overhead entirely without Mass Entity.</li>
+      <li><strong>Custom VAT Pipeline Tool:</strong> Wrote a Blender Python tool to fully automate baking, chunking, and exporting 700+ texture segments with direct UE5 placement — zero manual export work.</li>
+      <li><strong>Shader-Driven State Machine:</strong> Authored a full zombie AI state machine inside UE5's Material Editor with dynamic material system generating massive texture variation at minimal draw call cost.</li>
+      <li><strong>Niagara Hashing Optimization:</strong> Eliminated per-particle loops by grouping zombie IDs via a hashing strategy for GPU batch processing of thousands of agents simultaneously.</li>
+      <li><strong>Smart Ragdoll System:</strong> Built a data-structure-driven ragdoll pipeline using keyed lookups — settled ragdolls freeze and enter a hold pool, avoiding re-simulation entirely.</li>
+      <li><strong>Modular Character System:</strong> Designed a single zombie character compatible with both GPU-driven VAT (crowd mode) and full skeletal mesh (physics/ragdoll mode).</li>
+    </ul>
+
+    <div class="tags">
+      <span class="tag highlight">VAT</span>
+      <span class="tag highlight">Niagara GPU</span>
+      <span class="tag highlight">UE5 Materials</span>
+      <span class="tag highlight">Blender Python</span>
+      <span class="tag">ALS</span>
+      <span class="tag">Control Rig</span>
+      <span class="tag">Behavior Trees</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── PROFESSIONAL EXPERIENCE ── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Professional Experience</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <h3 class="exp-title">3D Artist & Game Developer</h3>
+          <div class="exp-company">MBS Studios</div>
+        </div>
+        <div class="exp-date">Mar 2023 – Jan 2025</div>
+      </div>
+      <ul class="exp-bullets">
+        <li><strong>AAA-Quality Modeling:</strong> Created high-fidelity models of Jewel Changi Airport Dome, Hong Kong Central Building, and Haven's Gate Shire using hybrid procedural and manual workflows.</li>
+        <li><strong>Texture Optimization:</strong> Improved texture efficiency by 35% through advanced UV manipulation and PBR workflows.</li>
+        <li><strong>UE5 Integration:</strong> Integrated assets with lighting, shaders, and level design optimization for a shipped skateboarding game.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag highlight">UE5</span>
+        <span class="tag highlight">Blender</span>
+        <span class="tag">Substance Painter</span>
+        <span class="tag">PBR</span>
+        <span class="tag">UV Mapping</span>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <h3 class="exp-title">3D Modeler</h3>
+          <div class="exp-company">Xplorazzi Adventures</div>
+        </div>
+        <div class="exp-date">2022 – 2023</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Developed detailed real-time 3D product visualization for a Voltas Beko fridge using high-to-low poly baking for optimal real-time rendering performance.</li>
+      </ul>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <h3 class="exp-title">Procedural City Generation</h3>
+          <div class="exp-company">Personal Project · UE5 & Blender Geometry Nodes</div>
+        </div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Built a fully procedural city layout system using Blender Geometry Nodes and Unreal Engine 5 for rapid level design iteration.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Geometry Nodes</span>
+        <span class="tag">UE5 Procedural</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── SKILLS ── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Technical Skills</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">⚙️ Engine & Rendering</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Unreal Engine 5 (Core)</span>
+          <span class="skill-pill">Niagara GPU</span>
+          <span class="skill-pill">VAT</span>
+          <span class="skill-pill">Ray Tracing</span>
+          <span class="skill-pill">Blueprints</span>
+          <span class="skill-pill">Control Rig</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">🎨 3D & Art</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Blender (Core)</span>
+          <span class="skill-pill">Substance Painter</span>
+          <span class="skill-pill">Substance Designer</span>
+          <span class="skill-pill">PBR Workflow</span>
+          <span class="skill-pill">UV Mapping</span>
+          <span class="skill-pill">LOD Optimization</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">🤖 Game Systems</div>
+        <div class="skill-pills">
+          <span class="skill-pill">AI Behavior Trees</span>
+          <span class="skill-pill">ALS</span>
+          <span class="skill-pill">Shader State Machines</span>
+          <span class="skill-pill">Light Baking</span>
+          <span class="skill-pill">Material Design</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">🛠️ Tooling & Procedural</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Blender Python (Core)</span>
+          <span class="skill-pill">Geometry Nodes</span>
+          <span class="skill-pill">UE5 Automation</span>
+          <span class="skill-pill">Git</span>
+          <span class="skill-pill">Perforce</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── EDUCATION & STATUS ── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Education & Availability</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+      <div class="exp-card">
+        <h3 class="exp-title" style="margin-bottom: 10px;">Self-Directed Learning</h3>
+        <p style="color: #a8a8a8; font-size: 13px; line-height: 1.6;">
+          Project-based learning through Udemy, YouTube, and hands-on production work. All skills validated through shipped professional projects at MBS Studios and independently engineered GPU simulation system.
+        </p>
+      </div>
+
+      <div class="exp-card" style="border-color: var(--gold);">
+        <h3 class="exp-title" style="color: var(--gold); margin-bottom: 10px;">● Open to Opportunities</h3>
+        <p style="color: #a8a8a8; font-size: 13px; line-height: 1.6;">
+          Available for full-time roles in Technical Art, UE5 Development, or Game Development. Immediate start available.
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-contact">
+      <a href="mailto:vasusharma244@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/vasu-sharma-80o" target="_blank">LinkedIn</a>
+      <a href="https://github.com/VasuSharma-vs" target="_blank">GitHub</a>
+      <a href="https://www.artstation.com/vasusharma" target="_blank">ArtStation</a>
+    </div>
+    <div class="footer-note">Designed & Built by Vasu Sharma © 2025</div>
+  </div>
+</footer>
+
+</body>
+</html>
